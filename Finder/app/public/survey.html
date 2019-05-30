@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -278,7 +277,7 @@
       </div>
       <div class="row mt-4">
         <div class="col-lg-3 mb-2">
-          <p><a href="https://github.com/Jsucameli/PetMate.git"target="_blank">GitHub Repo</a></p>
+          <p><a href="/api/pets" target="_blank">API Friends List</a> | <a href="https://github.com/Jsucameli/PetMate.git"target="_blank">GitHub Repo</a></p>
         </div>
       </div>
     </div>
@@ -288,7 +287,7 @@
     $("form").submit(function (event) {
       event.preventDefault();
       var yourScore = [parseInt($("#q1").val().trim()), parseInt($("#q2").val().trim()), parseInt($("#q3").val().trim()), parseInt($("#q4").val().trim()), parseInt($("#q5").val().trim()), parseInt($("#q6").val().trim()), parseInt($("#q7").val().trim()), parseInt($("#q8").val().trim()), parseInt($("#q9").val().trim()), parseInt($("#q10").val().trim())];
-      var newFriend = {
+      var newMate = {
         name: $("#name").val().trim(),
         photo: $("#photo").val().trim(),
         scores: yourScore
@@ -299,12 +298,12 @@
           for (var x = 0; x < data[i].scores.length; x++) {
             data[i].scores[x] = parseInt(data[i].scores[x]);
           }
-          if (JSON.stringify(data[i]) === JSON.stringify(newFriend)) {
+          if (JSON.stringify(data[i]) === JSON.stringify(newMate)) {
             isDuplicate = true;
           }
         }
         if (isDuplicate === false) {
-          $.post("/api/pets", newFriend,
+          $.post("/api/pets", newMate,
             function (data) {
               $.get("/api/pets", function (data) {
                 var compatiblePets = [];
